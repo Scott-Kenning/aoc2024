@@ -4,13 +4,9 @@ import { notFound } from 'next/navigation';
 import CodeBlock from '../components/CodeBlock';
 import ReactMarkdown from 'react-markdown';
 
-interface DayPageProps {
-  params: {
-    day: string;
-  };
-}
+type Params = Promise<{ day: string }>;
 
-export default async function DayPage({ params }: DayPageProps) {
+export default async function DayPage({ params }: {params: Params}) {
   const { day } = await params;
   const solutionsDir = path.join(process.cwd(), 'solutions', day);
 
