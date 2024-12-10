@@ -1,0 +1,4 @@
+## **Part one**
+For this problem, we are given a file with 2 lists side by side. The task given is to pair up the smallest number in the left list with the smallest number in the right list, the second smallest left number with the second smallest right number, and so on. Within each pair, calculate how far apart the two numbers are, and sum up all the distances. For the example input, the result would be 11 (2 + 1 + 0 + 1 + 2 + 5).
+## **Part two**
+For part 2 of this problem, we start with the same list. This time, the task is to figure out how often each number in the left list appears in the right list. After this a similarity score needs to be formed, which is calculated by adding up each number in the left list after multiplying it by the number of times that number appears in the right list. For the example input, the result would be 31 (9 + 4 + 0 + 0 + 9 + 9).
