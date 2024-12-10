@@ -9,7 +9,13 @@ export async function generateStaticParams() {
   return days;
 }
 
-export default function DayPage({ params }: { params: { day: string } }) {
+interface DayPageProps {
+  params: {
+    day: string;
+  };
+}
+
+export default function DayPage({ params }: DayPageProps) {
   const { day } = params;
   const solutionsDir = path.join(process.cwd(), 'solutions', day);
 
