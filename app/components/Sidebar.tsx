@@ -12,12 +12,16 @@ const Sidebar = ({ days }: SidebarProps) => {
   const url = useParams();
   const currentDay = url?.day;
 
-  // State to toggle sidebar for mobile
   const [isOpen, setIsOpen] = useState(false);
+
+  const sortedDays = days.sort((a, b) => {
+    const numA = parseInt(a.replace("day", ""), 10);
+    const numB = parseInt(b.replace("day", ""), 10);
+    return numA - numB;
+  });
 
   return (
     <>
-      {/* Hamburger Menu for Mobile */}
       <button
         className={`fixed top-4 left-4 z-50 text-white text-2xl md:hidden ${isOpen && "hidden"}`}
         onClick={() => setIsOpen(!isOpen)}
@@ -26,14 +30,13 @@ const Sidebar = ({ days }: SidebarProps) => {
         ☰
       </button>
 
-      {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 h-full w-64 bg-white shadow-md border-r-2 border-gray-200 transform transition-transform duration-300 ${
+        className={`fixed overflow-y-scroll top-0 left-0 z-40 h-full w-64 bg-white shadow-md border-r-2 border-gray-200 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:relative`}
       >
         <ul className="flex flex-col h-full">
-          {days.map((day) => {
+          {sortedDays.map((day) => {
             const isActive = currentDay === day;
             return (
               <Link href={`/${day}`} key={day}>
@@ -41,7 +44,7 @@ const Sidebar = ({ days }: SidebarProps) => {
                   className={`py-4 pl-8 text-lg font-semibold ${
                     isActive ? "bg-gray-200 text-gray-800" : ""
                   }`}
-                  onClick={() => setIsOpen(false)} // Close sidebar on click
+                  onClick={() => setIsOpen(false)}
                 >
                   {day.replace("day", "Day ")}
                 </li>
@@ -51,7 +54,6 @@ const Sidebar = ({ days }: SidebarProps) => {
         </ul>
       </aside>
 
-      {/* Overlay for Mobile Menu */}
       {isOpen && (
         <div
           className="fixed inset-0 z-30 bg-black opacity-50 md:hidden"

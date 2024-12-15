@@ -10,17 +10,9 @@ export default async function DayPage({ params }: {params: Params}) {
   const { day } = await params;
   const solutionsDir = path.join(process.cwd(), 'solutions', day);
 
-  let description = '';
   let exampleInput = '';
   let part1 = '';
   let part2 = '';
-
-  try {
-    const descriptionPath = path.join(solutionsDir, 'description.md');
-    description = fs.readFileSync(descriptionPath, 'utf8');
-  } catch {
-    // leave description as empty string
-  }
 
   try {
     const exampleInputPath = path.join(solutionsDir, 'example-input.txt');
@@ -37,26 +29,17 @@ export default async function DayPage({ params }: {params: Params}) {
   return (
     <div className="flex flex-col p-8">
       <p className="my-4">
-        See the full problem on the Advent of Code website&nbsp;
+        For a description of this problem, please check the&nbsp;
         <a
-          href={`https://adventofcode.com/2024/day/${day.slice(-1)}`}
+          href={`https://adventofcode.com/2024/day/${parseInt(day.replace('day', ''), 10)}`}
           target="_blank"
           rel="noreferrer"
           className="font-bold inline-block underline"
         >
-          here
+          Advent of Code website
         </a>
         .
       </p>
-
-      {description ? (
-        <ReactMarkdown>{description}</ReactMarkdown>
-      ) : (
-        <p className="mb-4">
-          I have not written a description for this problem yet. Please click the link above to view
-          the problem.
-        </p>
-      )}
 
       <p className="font-semibold mt-4">Example Input:</p>
       <CodeBlock code={exampleInput} />
